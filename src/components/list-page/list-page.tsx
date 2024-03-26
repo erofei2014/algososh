@@ -8,6 +8,8 @@ import { LinkedList } from "../classes/LinkedList";
 import { getArrowStatus, initLinkedList, getCircleSize, getElementColor } from "../../utils/utils";
 import { Circle } from "../ui/circle/circle";
 import { ArrowIcon } from "../ui/icons/arrow-icon";
+import { SHORT_DELAY_IN_MS } from "../../constants/delays";
+import { HEAD, TAIL } from "../../constants/element-captions";
 
 export const listSize = 9;
 
@@ -30,7 +32,7 @@ export const ListPage: React.FC = () => {
 
   const [steps, setSteps] = useState<(string | null)[][][]>([initLinkedList(list.print())]);
 
-  const { values, setValue, handleChange } = useForm({});
+  const { values, setValue, handleChange } = useForm({[inputElement]: '', [inputIndex]: ''});
 
   const addHeadElement = () => {
     setActive(true);
@@ -181,13 +183,17 @@ export const ListPage: React.FC = () => {
       }
 
       setCurrStepIndex(++index);
-    }, 500);
+    }, SHORT_DELAY_IN_MS);
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
   };
 
   return (
     <SolutionLayout title="Связный список">
       <div>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={onSubmit}>
           <Input
             name = {inputElement}
             value = {values?.[inputElement]}
@@ -231,7 +237,7 @@ export const ListPage: React.FC = () => {
             isLoader={loader === 'removeTail' ? true : false}
           />
         </form>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={onSubmit}>
           <Input
             type = 'number'
             extraClass = {styles.input}
@@ -276,8 +282,8 @@ export const ListPage: React.FC = () => {
         {steps &&
             <div className={styles.list}>
               {steps?.[currStepIndex].map((element, index) => {
-                let head = getCircleSize(index, steps?.[currStepIndex].length, 'head', element[2], element[3]);
-                let tail = getCircleSize(index, steps?.[currStepIndex].length, 'tail', element[4], element[5]);
+                let head = getCircleSize(index, steps?.[currStepIndex].length, HEAD, element[2], element[3]);
+                let tail = getCircleSize(index, steps?.[currStepIndex].length, TAIL, element[4], element[5]);
                 
                 return <div className={styles.list_elements} key={index}>
                   <Circle

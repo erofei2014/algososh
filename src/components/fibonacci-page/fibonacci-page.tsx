@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import styles from './fibonacci-page.module.css';
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
@@ -6,6 +6,7 @@ import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { useForm } from "../../hooks/useForm";
 import { getFibonacciSequence, makeStepsFromArray } from "../../utils/utils";
+import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 
 export const FibonacciPage: React.FC = () => {
   const maxNumber = 19;
@@ -15,13 +16,12 @@ export const FibonacciPage: React.FC = () => {
   const [steps, setSteps] = useState<number[][] | null>(null);
   const [currStepIndex, setCurrStepIndex] = useState(0);
 
-  const { values, handleChange } = useForm({});
+  const { values, handleChange } = useForm({[inputName]: ''});
 
 
   const startAlgorithm = () => {
     setActive(true);
     const fibonacciSequence = makeStepsFromArray(getFibonacciSequence(parseInt(values[inputName])));
-    console.log(fibonacciSequence);
     setSteps(fibonacciSequence);
     setCurrStepIndex(0);
 
@@ -37,7 +37,7 @@ export const FibonacciPage: React.FC = () => {
       }
 
       setCurrStepIndex(++index);
-    }, 500);
+    }, SHORT_DELAY_IN_MS);
   };
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -51,6 +51,7 @@ export const FibonacciPage: React.FC = () => {
         <form className={styles.form} onSubmit={submitForm}>
           <Input
             name = {inputName}
+            value = {values?.[inputName]}
             type = 'number'
             placeholder = "Введите текст"
             isLimitText = {true}
@@ -61,7 +62,7 @@ export const FibonacciPage: React.FC = () => {
             type = 'submit'
             text = 'Рассчитать'
             isLoader = {active}
-            disabled = {!values[inputName] ? true : false}
+            disabled = {!values[inputName] || parseInt(values[inputName]) > maxNumber ? true : false}
           />
         </form>
         {steps &&

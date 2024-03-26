@@ -7,6 +7,7 @@ import { Stack } from "../classes/Stack";
 import { useForm } from "../../hooks/useForm";
 import { Circle } from "../ui/circle/circle";
 import { getStackElementStatus } from "../../utils/utils";
+import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 
 const stackSize = 8;
 
@@ -61,7 +62,7 @@ export const StackPage: React.FC = () => {
         return;
       }
       setCurrStepIndex(++index);
-    }, 500);
+    }, SHORT_DELAY_IN_MS);
   };
 
   return (

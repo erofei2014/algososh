@@ -7,6 +7,7 @@ import { Direction } from "../../types/direction";
 import { Column } from "../ui/column/column";
 import { getRandomArr, sortWithBubbles, sortWithSelection, getColumnStatus } from "../../utils/utils";
 import { TSort } from "../../types/types";
+import { DELAY_IN_MS } from "../../constants/delays";
 
 export const SortingPage: React.FC = () => {
   const sortingTypeSelection = 'selection';
@@ -47,7 +48,7 @@ export const SortingPage: React.FC = () => {
         }
   
         setCurrStepIndex(++index);
-      }, 1000);
+      }, DELAY_IN_MS);
     }
   };
 

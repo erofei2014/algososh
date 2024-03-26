@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState } from "react";
 import styles from './string.module.css';
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
@@ -6,6 +6,7 @@ import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { getCircleStatus, reverseString } from "../../utils/utils";
 import { useForm } from "../../hooks/useForm";
+import { DELAY_IN_MS } from "../../constants/delays";
 
 export const StringComponent: React.FC = () => {
   const [active, setActive] = useState(false);
@@ -15,7 +16,7 @@ export const StringComponent: React.FC = () => {
   const inputName = 'string';
   const maximumLength = 11;
 
-  const { values, handleChange } = useForm({});
+  const { values, handleChange } = useForm({[inputName]: ''});
 
   const startAlgorithm = () => {
     setActive(true);
@@ -35,7 +36,7 @@ export const StringComponent: React.FC = () => {
       }
 
       setCurrStepIndex(++index);
-    }, 1000);
+    }, DELAY_IN_MS);
   };
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -49,6 +50,7 @@ export const StringComponent: React.FC = () => {
         <form className={styles.form} onSubmit={submitForm}>
           <Input
             name = {inputName}
+            value = {values?.[inputName]}
             placeholder = "Введите текст"
             isLimitText = {true}
             maxLength = {maximumLength}

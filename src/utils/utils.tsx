@@ -2,6 +2,7 @@ import { ElementStates } from "../types/element-states";
 import { TCircleStatus, TColumnStatus, TStackStatus, TQueueStatus } from "../types/types";
 import { queueSize } from "../components/queue-page/queue-page";
 import { Circle } from "../components/ui/circle/circle";
+import { HEAD, TAIL } from "../constants/element-captions";
 
 export const reverseString = (string: string): string[][] => {
   const arr = string.split('');
@@ -56,7 +57,6 @@ export const getElementColor = (color: string | null): ElementStates => {
   }
 };
 
-
 export const getColumnStatus = ({index, steps, currStepIndex}: TColumnStatus): ElementStates => {
   const minIndex = steps[currStepIndex][1];
   const currIndex = steps[currStepIndex][2];
@@ -83,14 +83,6 @@ export const getStackElementStatus = ({index, lastIndex, currStepIndex}: TStackS
   return ElementStates.Default;
 };
 
-export const getQueueElementStatus = ({ index, keyIndex, currStepIndex}: TQueueStatus): ElementStates => {
-  if (index === keyIndex && (currStepIndex === 0 || currStepIndex === 1)) {
-    return ElementStates.Changing; 
-  }
-
-  return ElementStates.Default;
-};
-
 export const getArrowStatus = (color?: string): string => {
   switch (color) {
     case 'changing': {
@@ -109,7 +101,7 @@ export const getCircleSize = (index: number, maxIndex:number, text:string, value
       isSmall={true}>
       </Circle>;
   } else { 
-    return index===0 && text==='head' ? 'head' : index===maxIndex-1 && text==='tail' ? 'tail' : '';
+    return index===0 && text===HEAD ? HEAD : index===maxIndex-1 && text===TAIL ? TAIL : '';
   }
 };
 

@@ -7,6 +7,8 @@ import { useForm } from "../../hooks/useForm";
 import { Queue } from "../classes/Queue";
 import { Circle } from "../ui/circle/circle";
 import { getQueue, getElementColor } from "../../utils/utils";
+import { SHORT_DELAY_IN_MS } from "../../constants/delays";
+import { HEAD, TAIL } from "../../constants/element-captions";
 
 export const queueSize = 7;
 
@@ -20,7 +22,7 @@ export const QueuePage: React.FC = () => {
   const [currStepIndex, setCurrStepIndex] = useState(0);
   const [steps, setSteps] = useState<(string | null)[][][]>([getQueue()]);
 
-  const { values, setValue, handleChange } = useForm({});
+  const { values, setValue, handleChange } = useForm({[inputName]: ''});
   
   const addQueueElement = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -96,7 +98,7 @@ export const QueuePage: React.FC = () => {
       }
 
       setCurrStepIndex(++index);
-    }, 500);
+    }, SHORT_DELAY_IN_MS);
   };
 
   return (
@@ -144,8 +146,8 @@ export const QueuePage: React.FC = () => {
             state = {status}
             letter = {text}
             index = {index}
-            head = {queue.getHead() === index && (queue.getSize() > 0 || queue.getHead() !== 0) ? 'head' : ''}
-            tail = {queue.getTail() === index && (queue.getSize() > 0 || queue.getTail() !== 0) ? 'tail' : '' }
+            head = {queue.getHead() === index && (queue.getSize() > 0 || queue.getHead() !== 0) ? HEAD : ''}
+            tail = {queue.getTail() === index && (queue.getSize() > 0 || queue.getTail() !== 0) ? TAIL : '' }
             key = {index}
             />
           })}
