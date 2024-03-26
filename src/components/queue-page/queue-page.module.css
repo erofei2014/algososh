@@ -1,0 +1,21 @@
+.form {
+  max-width: 829px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 12px;
+}
+
+.stack_clear {
+  margin-left: 80px;
+}
+
+.queue {
+  margin: 78px auto 0;
+  max-width: 829px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+}
