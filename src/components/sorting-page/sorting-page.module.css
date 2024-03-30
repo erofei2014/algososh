@@ -1,0 +1,31 @@
+.settings {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 52px;
+}
+
+.radio {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+}
+
+.direction {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-right: 28px;
+}
+
+.chart {
+  margin: 48px auto 0;
+  min-height: 340px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: end;
+  gap: 10px;
+}

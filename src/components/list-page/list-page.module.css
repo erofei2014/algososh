@@ -1,0 +1,38 @@
+.form {
+  max-width: 952px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 12px;
+}
+
+.stack_clear {
+  margin-left: 80px;
+}
+
+.input {
+  max-width: 204px;
+}
+
+.list {
+  margin: 120px auto 0;
+  max-width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap:72px 16px;
+}
+
+.list_elements {
+  margin:0;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  gap:12px;
+}
+
+.display_none {
+  display: none;
+}
